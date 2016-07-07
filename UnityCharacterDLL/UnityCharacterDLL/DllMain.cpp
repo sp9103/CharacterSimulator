@@ -13,11 +13,13 @@ extern "C"{
 	}
 	
 	void EXPORT_API servertInit(){
+		server_.Init();
 	}
 
 	void EXPORT_API getData(){
 	}
 
 	void EXPORT_API	serverDeinit(){
+		server_.DeInit();
 	}
 }

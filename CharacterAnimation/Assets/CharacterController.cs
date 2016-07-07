@@ -7,6 +7,10 @@ public class CharacterController : MonoBehaviour {
 
     [DllImport("UnityCharacterDLL")]
     private static extern void TEST();
+    [DllImport("UnityCharacterDLL")]
+    private static extern void servertInit();
+    [DllImport("UnityCharacterDLL")]
+    private static extern void serverDeinit();
 
     public GameObject character;
     public bool ReadFromFile;
@@ -17,7 +21,6 @@ public class CharacterController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        TEST();
         if (FrameRate <= 0) FrameRate = 30;
 
         waitInterval = 1000.0f / (float)FrameRate;

@@ -33,6 +33,7 @@ private:
 
 	Thread m_Thread;
 	bool m_ThreadOpen;
+	bool m_ThreadClose;
 
 	void ErrorHandling(char *message);
 	void openServer(char *ip, int portNum);

@@ -4,6 +4,7 @@
 CharacterServer::CharacterServer(void)
 {
 	m_ThreadOpen = false;
+	m_ThreadClose = false;
 }
 
 
@@ -97,6 +98,8 @@ void CharacterServer::ErrorHandling(char *message)
 }
 
 void CharacterServer::DeInit(){
+	m_ThreadClose = true;
+
 	while(m_ThreadOpen) Sleep(10);
 }
 
@@ -107,10 +110,14 @@ UINT WINAPI CharacterServer::serverThread(LPVOID param){
 
 	//받는 대기단
 	//TO-DO
+	while(!t_server->m_ThreadClose){
+	}
 
 	// 연결 종료
 	closesocket(t_server->hClntSock);
 	WSACleanup();
+
+	t_server->m_ThreadOpen = false;
 
 	return 0;
 }
