@@ -32,3 +32,7 @@ UnityCharacterDLL/x64/Release/UnityCharacterDLL.dll
 *.opensdf
 *.sdf
 *.cachefile
+UnityCharacterDLL/Debug/UnityCharacterDLL.dll
+UnityCharacterDLL/Debug/UnityCharacterDLL.exp
+UnityCharacterDLL/Debug/UnityCharacterDLL.ilk
+UnityCharacterDLL/Debug/UnityCharacterDLL.lib
