@@ -12,7 +12,7 @@ extern "C"{
 		MessageBox(NULL, L"HELLO WORLD!", L"TEST", MB_OK);
 	}
 	
-	void EXPORT_API servertInit(){
+	void EXPORT_API serverInit(){
 		server_.Init();
 	}
 

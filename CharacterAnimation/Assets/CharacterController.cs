@@ -8,34 +8,25 @@ public class CharacterController : MonoBehaviour {
     [DllImport("UnityCharacterDLL")]
     private static extern void TEST();
     [DllImport("UnityCharacterDLL")]
-    private static extern void servertInit();
+    private static extern void serverInit();
     [DllImport("UnityCharacterDLL")]
     private static extern void serverDeinit();
 
     public GameObject character;
-    public bool ReadFromFile;
-    public int FrameRate = 30;
-    public string FilePath;
 
-    private float waitInterval;
 
 	// Use this for initialization
 	void Start () {
-        if (FrameRate <= 0) FrameRate = 30;
-
-        waitInterval = 1000.0f / (float)FrameRate;
+        //serverInit();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //파일에서부터 읽어들일때
-        if (ReadFromFile)
-        {
-
-        }
-        else        //통신으로부터 직접받아올
-        {
-            //TO-DO
-        }
+        
 	}
+
+    //종료시 실행 함수 -> Deinit 단
+    void OnApplicationQuit()
+    {
+    }
 }
