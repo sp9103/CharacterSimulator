@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Runtime.InteropServices;
 
 public class CharacterController : MonoBehaviour {
+
+    [DllImport("UnityCharacterDLL")]
+    private static extern void TEST();
+
     public GameObject character;
     public bool ReadFromFile;
     public int FrameRate = 30;
@@ -11,6 +17,7 @@ public class CharacterController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        TEST();
         if (FrameRate <= 0) FrameRate = 30;
 
         waitInterval = 1000.0f / (float)FrameRate;

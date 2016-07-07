@@ -15,3 +15,20 @@
 # emacs crap
 
 #*
+CharacterAnimation/UnityCharacterDLL.dll
+CharacterAnimation/UnityCharacterDLL.exp
+CharacterAnimation/UnityCharacterDLL.lib
+UnityCharacterDLL/x64/Release/UnityCharacterDLL.dll
+*.log
+*.tlog
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
