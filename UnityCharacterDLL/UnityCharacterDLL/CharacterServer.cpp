@@ -139,6 +139,13 @@ UINT WINAPI CharacterServer::serverThread(LPVOID param){
 	return 0;
 }
 
+void CharacterServer::getData(int *count, StateVector *dst){
+	EnterCriticalSection(&cs);
+	*count = dataCount;
+	memcpy(dst, stateVec_, sizeof(StateVector) * 2);
+	LeaveCriticalSection(&cs);
+}
+
 //bool CharacterServer::SendAndCheck(RobotInfoData data){
 //	char buf[256];
 //	memcpy(buf, &data, sizeof(RobotInfoData));

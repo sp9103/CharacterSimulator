@@ -20,7 +20,7 @@ public:
 	void GetIPAddress(char *ip);
 	void Init();
 	void DeInit();
-	void getData();
+	void getData(int *count, StateVector *stateVec);
 
 private:
 	int _portNum;
