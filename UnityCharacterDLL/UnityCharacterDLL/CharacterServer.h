@@ -5,6 +5,7 @@
 #include <winsock.h>
 
 #include "Thread.h"
+#include "define.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -26,7 +27,6 @@ private:
 	char _IP[256];
 	WSADATA wsaData;
 	SOCKET hServSock;
-	SOCKET hClntSock;
 	SOCKADDR_IN servAddr;
 	SOCKADDR_IN clntAddr;
 	int szClntAddr;
@@ -34,6 +34,11 @@ private:
 	Thread m_Thread;
 	bool m_ThreadOpen;
 	bool m_ThreadClose;
+
+	CRITICAL_SECTION cs;
+
+	int dataCount;
+	StateVector stateVec_[2];				//비교대상과 보정 결과 최대 두개를 받아옴
 
 	void ErrorHandling(char *message);
 	void openServer(char *ip, int portNum);

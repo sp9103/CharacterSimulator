@@ -5,6 +5,8 @@ CharacterServer::CharacterServer(void)
 {
 	m_ThreadOpen = false;
 	m_ThreadClose = false;
+
+	dataCount = -1;
 }
 
 
@@ -36,6 +38,7 @@ void CharacterServer::GetIPAddress(char *ip){
 }
 
 void CharacterServer::Init(){
+	InitializeCriticalSection(&cs);
 	m_Thread.StartThread(serverThread, this);
 	m_ThreadOpen = true;
 }
@@ -80,14 +83,6 @@ void CharacterServer::openServer(char *ip, int portNum){
 	{
 		ErrorHandling("listen() error");
 	}
-
-	// 연결 요청 수락
-	szClntAddr = sizeof(clntAddr);
-	hClntSock = accept(hServSock, (SOCKADDR*) &clntAddr, &szClntAddr);
-	if(hClntSock == INVALID_SOCKET)
-	{
-		ErrorHandling("accept() error");
-	}
 }
 
 void CharacterServer::ErrorHandling(char *message)
@@ -101,20 +96,42 @@ void CharacterServer::DeInit(){
 	m_ThreadClose = true;
 
 	while(m_ThreadOpen) Sleep(10);
+
+	DeleteCriticalSection(&cs);	
 }
 
 UINT WINAPI CharacterServer::serverThread(LPVOID param){
 	CharacterServer *t_server = (CharacterServer *)param;
+
+	char buf[1024];
+	renderData data_;
+
 	//서버 시작
 	t_server->openServer(NULL, PORT);
 
 	//받는 대기단
 	//TO-DO
 	while(!t_server->m_ThreadClose){
+		int dataLen = recv(t_server->hServSock, buf, sizeof(buf), 0);
+		if(dataLen == -1){
+			t_server->ErrorHandling("read() Error");
+			t_server->m_ThreadClose = true;
+			break;
+		}
+
+		//수신 데이터 변환
+		memcpy(&data_, buf, sizeof(renderData));
+
+		//데이터 변환
+		EnterCriticalSection(&t_server->cs);
+		t_server->dataCount = data_.count;
+		memcpy(&t_server->stateVec_, data_.character, sizeof(StateVector) * 2);
+		LeaveCriticalSection(&t_server->cs);
+
 	}
 
 	// 연결 종료
-	closesocket(t_server->hClntSock);
+	closesocket(t_server->hServSock);
 	WSACleanup();
 
 	t_server->m_ThreadOpen = false;
