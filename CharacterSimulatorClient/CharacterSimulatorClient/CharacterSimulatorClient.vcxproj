@@ -78,9 +78,12 @@
   <ItemGroup>
     <ClCompile Include="CharacterClient.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StateVecRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\UnityCharacterDLL\UnityCharacterDLL\define.h" />
     <ClInclude Include="CharacterClient.h" />
+    <ClInclude Include="StateVecRecord.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

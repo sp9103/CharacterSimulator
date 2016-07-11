@@ -21,9 +21,18 @@
     <ClCompile Include="CharacterClient.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="StateVecRecord.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterClient.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StateVecRecord.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\UnityCharacterDLL\UnityCharacterDLL\define.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
