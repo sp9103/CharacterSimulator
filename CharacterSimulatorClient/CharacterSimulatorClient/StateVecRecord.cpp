@@ -79,7 +79,7 @@ void StateVecRecord::WriteState(StateVector src){
 
 bool StateVecRecord::ReadState(StateVector *dst){
 	if(m_fp != NULL){
-		fread(dst, sizeof(StateVector), 1, m_fp);
+		fread(dst, sizeof(StateVector), 4, m_fp);
 	}
 	else return false;
 
