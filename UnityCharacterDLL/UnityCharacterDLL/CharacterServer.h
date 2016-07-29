@@ -28,7 +28,6 @@ private:
 	WSADATA wsaData;
 	SOCKET hServSock;
 	SOCKADDR_IN servAddr;
-	SOCKADDR_IN clntAddr;
 	int szClntAddr;
 
 	Thread m_Thread;

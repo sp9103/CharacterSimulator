@@ -1,8 +1,12 @@
 #pragma once
 
+#ifndef DEFINE_HEADER
+#define DEFINE_HEADER
+#include "define.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "define.h"
 
 #define DEFAULT_FILE_PATH "BinaryData\\."
 

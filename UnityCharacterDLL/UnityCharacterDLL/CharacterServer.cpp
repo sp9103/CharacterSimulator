@@ -46,23 +46,24 @@ void CharacterServer::Init(){
 void CharacterServer::openServer(char *ip, int portNum){
 	_portNum = portNum;
 
-	if(ip == NULL){
+	if (ip == NULL){
 		char temp[256];
 		GetIPAddress(temp);
 		strcpy(_IP, temp);
-	}else{
+	}
+	else{
 		strcpy(_IP, ip);
 	}
 
 	// Load WinSocket 2.2 DLL
-	if(WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 	{
 		ErrorHandling("WSAStartup(), error");
 	}
 
 	// 서버 소켓 생성
 	hServSock = socket(PF_INET, SOCK_STREAM, 0);
-	if(hServSock == INVALID_SOCKET)
+	if (hServSock == INVALID_SOCKET)
 	{
 		ErrorHandling("socket() error");
 	}
@@ -73,13 +74,13 @@ void CharacterServer::openServer(char *ip, int portNum){
 	servAddr.sin_port = htons(_portNum);
 
 	// 소켓에 주소 할당
-	if(bind(hServSock, (SOCKADDR*) &servAddr, sizeof(servAddr)) == SOCKET_ERROR)
+	if (bind(hServSock, (SOCKADDR*)&servAddr, sizeof(servAddr)) == SOCKET_ERROR)
 	{
 		ErrorHandling("bind() error");
 	}
 
 	// 연결 요청 대기 상태
-	if(listen(hServSock, 5) == SOCKET_ERROR)
+	if (listen(hServSock, 5) == SOCKET_ERROR)
 	{
 		ErrorHandling("listen() error");
 	}
@@ -87,17 +88,21 @@ void CharacterServer::openServer(char *ip, int portNum){
 
 void CharacterServer::ErrorHandling(char *message)
 {
-	fputs(message, stderr);
+	/*fputs(message, stderr);
 	fputc('\n', stderr);
+	exit(1);*/
+	wchar_t text1[30];
+	mbstowcs(text1, message, strlen(message) + 1);
+	MessageBox(NULL, text1, L"TEST", MB_OK);
 	exit(1);
 }
 
 void CharacterServer::DeInit(){
 	m_ThreadClose = true;
 
-	while(m_ThreadOpen) Sleep(10);
+	while (m_ThreadOpen) Sleep(10);
 
-	DeleteCriticalSection(&cs);	
+	DeleteCriticalSection(&cs);
 }
 
 UINT WINAPI CharacterServer::serverThread(LPVOID param){
@@ -111,13 +116,13 @@ UINT WINAPI CharacterServer::serverThread(LPVOID param){
 
 	//받는 대기단
 	//TO-DO
-	while(!t_server->m_ThreadClose){
+	while (!t_server->m_ThreadClose){
 		int dataLen = recv(t_server->hServSock, buf, sizeof(buf), 0);
-		if(dataLen == -1){
-			t_server->ErrorHandling("read() Error");
-			t_server->m_ThreadClose = true;
-			break;
+		if (dataLen == -1){
+			continue;
 		}
+
+		MessageBox(NULL, L"Data receive", L"TEST", MB_OK);
 
 		//수신 데이터 변환
 		memcpy(&data_, buf, sizeof(renderData));

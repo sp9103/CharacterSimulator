@@ -17,7 +17,7 @@ public class CharacterController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //serverInit();
+        serverInit();
 	}
 	
 	// Update is called once per frame
@@ -28,5 +28,6 @@ public class CharacterController : MonoBehaviour {
     //종료시 실행 함수 -> Deinit 단
     void OnApplicationQuit()
     {
+        serverDeinit();
     }
 }
