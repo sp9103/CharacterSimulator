@@ -16,17 +16,20 @@ extern "C"{
 		server_.Init();
 	}
 
-	void EXPORT_API getData(int *count, float *joint){
+	int EXPORT_API getData(float *joint){
 		StateVector temp[2];
-		server_.getData(count, temp);
+		int count = 0;
+		server_.getData(&count, temp);
 
-		for(int c = 0; c < *count; c++){
+		for(int c = 0; c < count; c++){
 			for(int i = 0; i < Actual_JointType_Count; i++){
 				joint[c * Actual_JointType_Count * 3 + 3*i + 0] = temp[c].joints[i].X;
 				joint[c * Actual_JointType_Count * 3 + 3*i + 1] = temp[c].joints[i].Y;
 				joint[c * Actual_JointType_Count * 3 + 3*i + 2] = temp[c].joints[i].Z;
 			}
 		}
+
+		return count;
 	}
 
 	void EXPORT_API	serverDeinit(){

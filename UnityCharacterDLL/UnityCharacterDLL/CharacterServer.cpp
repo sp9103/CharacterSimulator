@@ -130,8 +130,6 @@ UINT WINAPI CharacterServer::serverThread(LPVOID param){
 			continue;
 		}
 
-		MessageBox(NULL, L"Data receive", L"TEST", MB_OK);
-
 		//수신 데이터 변환
 		memcpy(&data_, buf, sizeof(renderData));
 
