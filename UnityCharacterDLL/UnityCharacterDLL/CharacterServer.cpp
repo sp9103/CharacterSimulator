@@ -84,6 +84,14 @@ void CharacterServer::openServer(char *ip, int portNum){
 	{
 		ErrorHandling("listen() error");
 	}
+
+	// 연결 요청 수락
+	szClntAddr = sizeof(clntAddr);
+	hClntSock = accept(hServSock, (SOCKADDR*)&clntAddr, &szClntAddr);
+	if (hClntSock == INVALID_SOCKET)
+	{
+		ErrorHandling("accept() error");
+	}
 }
 
 void CharacterServer::ErrorHandling(char *message)
@@ -117,7 +125,7 @@ UINT WINAPI CharacterServer::serverThread(LPVOID param){
 	//받는 대기단
 	//TO-DO
 	while (!t_server->m_ThreadClose){
-		int dataLen = recv(t_server->hServSock, buf, sizeof(buf), 0);
+		int dataLen = recv(t_server->hClntSock, buf, sizeof(buf), 0);
 		if (dataLen == -1){
 			continue;
 		}

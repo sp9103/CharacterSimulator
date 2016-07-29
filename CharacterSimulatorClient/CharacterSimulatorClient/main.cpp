@@ -14,11 +14,11 @@ int main(){
 	client_.Init();
 
 	while(DataReader_.ReadState(characterState)){
-		//client_.
+		client_.sendData(characterState, 2);
 	}
 
 	DataReader_.CloseFile();
-	client_.Init();
+	client_.DeInit();
 
 	return 0;
 }

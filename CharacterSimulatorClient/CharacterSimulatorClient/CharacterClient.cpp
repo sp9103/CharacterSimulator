@@ -80,12 +80,10 @@ void CharacterClient::sendData(StateVector *data, int count){
 	for(int i = 0; i < count; i++)	sendVec.character[i] = data[0];
 
 	memcpy(buf, &sendVec, sizeof(renderData));
-	send(hSocket, buf, sizeof(renderData), 0);
+	int sendresult = send(hSocket, buf, sizeof(renderData), 0);
 }
 
 void CharacterClient::ErrorHandling(char *message)
 {
-	fputs(message, stderr);
-	fputc('\n', stderr);
-	exit(1);
+	printf("%s\n", message);
 }

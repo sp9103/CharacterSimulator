@@ -27,6 +27,8 @@ private:
 	char _IP[256];
 	WSADATA wsaData;
 	SOCKET hServSock;
+	SOCKET hClntSock;
+	SOCKADDR_IN clntAddr;
 	SOCKADDR_IN servAddr;
 	int szClntAddr;
 
